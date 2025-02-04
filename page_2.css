@@ -32,12 +32,12 @@ header {
 }
 
 .speaker-svg svg {
-  transition: transform 0.2s ease;
+  display: none;
 }
 
-.speaker-svg:hover svg {
+/* .speaker-svg:hover svg {
   transform: scale(1.1);
-}
+} */
 
 .question-sec {
   margin-top: 24px;
@@ -110,6 +110,7 @@ header {
 .nav a {
   color: #02a409;
   text-decoration: none;
+  display: none;
 }
 .credits {
   text-align: center;
