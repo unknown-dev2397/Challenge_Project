@@ -115,3 +115,10 @@ header {
   text-align: center;
   margin-top: 24px;
 }
+
+.container-inputs.incorrect {
+  border: 2px solid rgba(255, 122, 122, 1);
+}
+.container-inputs.correct {
+  border: 2px solid rgba(53, 189, 58, 1);
+}
