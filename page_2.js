@@ -6,8 +6,8 @@ const nextBtn = document.querySelector(".nav a");
 const choiceSec = document.querySelector(".choice-por");
 const timer = document.querySelector(".timer");
 
-let currentQuestionIndex = 0;
-let timeLeft = 20;
+let currentQuestionIndex = JSON.parse(localStorage.getItem("QuestionNum")) || 0;
+let timeLeft = 30;
 let countdown;
 
 const halftime = Math.floor(timeLeft / 2);
@@ -15,7 +15,7 @@ const sevfivper = Math.floor(timeLeft * 0.25);
 
 const startTimer = () => {
   if (countdown) {
-    clearInterval(countdown); // Clear any existing interval
+    clearInterval(countdown);
   }
 
   countdown = setInterval(() => {
@@ -36,6 +36,7 @@ const startTimer = () => {
       timer.style.backgroundColor = "#02a409";
       nextBtn.style.color = "rgba(1, 171, 8, 1)";
     }
+
     if (timeLeft <= halftime) {
       document.body.style.backgroundColor = "#E4E5C7";
       timer.style.backgroundColor = "rgba(197, 177, 0, 0.65)";
@@ -75,6 +76,7 @@ const updateQuestion = () => {
       if (option.innerText !== currentQuestion.answer) {
         option.classList.add("incorrect");
       }
+
       allOptions.forEach((opt) => {
         if (opt.innerText === currentQuestion.answer) {
           opt.classList.add("correct");
@@ -86,20 +88,28 @@ const updateQuestion = () => {
       setTimeout(() => {
         if (currentQuestionIndex < jsQuestions.length - 1) {
           currentQuestionIndex++;
+          localStorage.setItem(
+            "QuestionNum",
+            JSON.stringify(currentQuestionIndex)
+          );
           updateQuestion();
         }
-      }, 2000);
+      }, 500);
     });
   });
 
-  // Reset time for each new question
-  timeLeft = 20;
+  timeLeft = timeLeft;
   startTimer();
 };
 
 nextBtn.addEventListener("click", () => {
   if (currentQuestionIndex < jsQuestions.length - 1) {
     currentQuestionIndex++;
+    localStorage.setItem("QuestionNum", currentQuestionIndex);
+    if (currentQuestionIndex >= jsQuestions.length - 1) {
+      localStorage.removeItem("QuestionNum");
+      nextBtn.style.display = "none";
+    }
     updateQuestion();
   }
 });
