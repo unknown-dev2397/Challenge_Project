@@ -26,20 +26,6 @@ header {
   margin-bottom: 16px;
 }
 
-.result {
-  text-align: center;
-  font-weight: 600;
-  font-size: 32px;
-  margin-top: -24px;
-}
-
-.graph {
-  display: flex;
-  justify-content: center;
-  margin-top: 48px;
-  transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
-}
 main {
   margin-top: -100px;
 }
