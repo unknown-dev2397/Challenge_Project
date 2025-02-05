@@ -12,19 +12,40 @@ const correSelecAud = new Audio("/music/yes-daddy_CKEAffI.mp3");
 let currentQuestionIndex = JSON.parse(localStorage.getItem("QuestionNum")) || 0;
 let storedTimeLeft = JSON.parse(localStorage.getItem("Timer"));
 let lastTimestamp = JSON.parse(localStorage.getItem("LastTimestamp"));
+let originalTime = JSON.parse(localStorage.getItem("OriginalTime")) || 20;
 let countdown;
-
 let timeLeft;
 
 if (storedTimeLeft && lastTimestamp) {
   const elapsedTime = Math.floor((Date.now() - lastTimestamp) / 1000);
   timeLeft = Math.max(storedTimeLeft - elapsedTime, 0);
 } else {
-  timeLeft = 20;
+  timeLeft = 30;
 }
 
-const halftime = Math.floor(timeLeft / 2);
-const sevfivper = Math.floor(timeLeft * 0.25);
+if (!localStorage.getItem("OriginalTime")) {
+  localStorage.setItem("OriginalTime", JSON.stringify(timeLeft));
+  originalTime = timeLeft;
+}
+
+const halftime = Math.floor(originalTime / 2);
+const sevfivper = Math.floor(originalTime * 0.25);
+
+const updateBackgroundColor = () => {
+  if (timeLeft > halftime) {
+    document.body.style.backgroundColor = "rgba(204, 226, 194, 1)";
+    timer.style.backgroundColor = "#02a409";
+    nextBtn.style.color = "rgba(1, 171, 8, 1)";
+  } else if (timeLeft <= halftime && timeLeft > sevfivper) {
+    document.body.style.backgroundColor = "#E4E5C7";
+    timer.style.backgroundColor = "rgba(197, 177, 0, 0.65)";
+    nextBtn.style.color = "#C58800";
+  } else {
+    document.body.style.backgroundColor = "rgba(219, 173, 173, 1)";
+    timer.style.backgroundColor = "rgba(197, 12, 0, 0.65)";
+    nextBtn.style.color = "rgba(197, 0, 0, 1)";
+  }
+};
 
 const startTimer = () => {
   if (countdown) clearInterval(countdown);
@@ -34,6 +55,7 @@ const startTimer = () => {
       clearInterval(countdown);
       localStorage.removeItem("QuestionNum");
       localStorage.removeItem("Timer");
+      localStorage.removeItem("OriginalTime");
       nextBtn.style.display = "block";
       return;
     }
@@ -48,19 +70,7 @@ const startTimer = () => {
       seconds
     ).padStart(2, "0")}`;
 
-    if (timeLeft > halftime) {
-      document.body.style.backgroundColor = "rgba(204, 226, 194, 1)";
-      timer.style.backgroundColor = "#02a409";
-      nextBtn.style.color = "rgba(1, 171, 8, 1)";
-    } else if (timeLeft <= halftime && timeLeft > sevfivper) {
-      document.body.style.backgroundColor = "#E4E5C7";
-      timer.style.backgroundColor = "rgba(197, 177, 0, 0.65)";
-      nextBtn.style.color = "#C58800";
-    } else {
-      document.body.style.backgroundColor = "rgba(219, 173, 173, 1)";
-      timer.style.backgroundColor = "rgba(197, 12, 0, 0.65)";
-      nextBtn.style.color = "rgba(197, 0, 0, 1)";
-    }
+    updateBackgroundColor();
   }, 1000);
 };
 
@@ -129,7 +139,7 @@ const updateQuestion = () => {
             "QuestionNum",
             JSON.stringify(currentQuestionIndex)
           );
-          timeLeft = 20;
+          timeLeft = 30;
           localStorage.setItem("Timer", JSON.stringify(timeLeft));
           localStorage.setItem("LastTimestamp", JSON.stringify(Date.now()));
           updateQuestion();
@@ -145,5 +155,6 @@ nextBtn.addEventListener("click", () => {
   document.location.href = "page_3.html";
 });
 
+updateBackgroundColor();
 startTimer();
 updateQuestion();
