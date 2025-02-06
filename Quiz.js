@@ -32,15 +32,12 @@ const updateBackgroundColor = () => {
   if (timeLeft > 15) {
     document.body.style.backgroundColor = "rgba(204, 226, 194, 1)";
     timer.style.backgroundColor = "rgba(1, 171, 8, 1)";
-    nextBtn.style.color = "rgba(1, 171, 8, 1)";
   } else if (timeLeft > 7) {
     document.body.style.backgroundColor = "#E4E5C7";
     timer.style.backgroundColor = "rgba(197, 177, 0, 0.65)";
-    nextBtn.style.color = "#C58800";
   } else {
     document.body.style.backgroundColor = "rgba(219, 173, 173, 1)";
     timer.style.backgroundColor = "rgba(197, 12, 0, 0.65)";
-    nextBtn.style.color = "rgba(197, 0, 0, 1)";
   }
 };
 
@@ -69,9 +66,6 @@ const updateQuestion = () => {
   if (currentQuestionIndex >= jsQuestions.length) {
     localStorage.removeItem("QuestionNum");
     clearInterval(countdown);
-    setTimeout(() => {
-      document.location.href = "page_3.html";
-    }, 1000);
     return;
   }
 
@@ -119,7 +113,9 @@ const updateQuestion = () => {
 
       if (currentQuestionIndex === jsQuestions.length - 1) {
         localStorage.removeItem("QuestionNum");
-        nextBtn.style.display = "block";
+        setTimeout(() => {
+          document.location.href = "Result.html";
+        }, 1500);
         clearInterval(countdown);
       }
 
@@ -141,10 +137,6 @@ const updateQuestion = () => {
 
   startTimer();
 };
-
-nextBtn.addEventListener("click", () => {
-  document.location.href = "Result.html";
-});
 
 updateBackgroundColor();
 startTimer();

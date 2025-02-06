@@ -38,7 +38,16 @@ if (greenGraph && redGraph && GreenText && RedText) {
     } else if (progressPercentage > 50 && progressPercentage <= 75) {
       Qoute.innerHTML = "Keep learning, you have a good score!";
     } else {
-      lockedInAlien.play();
+      lockedInAlien.addEventListener("canplaythrough", () => {
+        try {
+          lockedInAlien.play().catch((err) => {
+            console.error("Error playing media:", err);
+          });
+        } catch (err) {
+          console.error("Caught error:", err);
+        }
+      });
+
       Qoute.innerHTML = "You are locked In!";
     }
   }

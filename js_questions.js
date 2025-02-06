@@ -39,7 +39,7 @@ export const jsQuestions = [
   //     "B) var obj = Object();",
   //     "C) var obj = {};",
   //   ],
-  //   answer: "C) var obj = {}",
+  //   answer: "C) var obj = {};",
   // },
   // {
   //   question: "What is the output of the following code? console.log(1 + '1');",
