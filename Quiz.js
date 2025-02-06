@@ -6,37 +6,34 @@ const nextBtn = document.querySelector(".nav a");
 const choiceSec = document.querySelector(".choice-por");
 const timer = document.querySelector(".timer");
 const speakerIco = document.querySelector(".speaker-svg svg");
-const wrongSelecAud = new Audio("/music/look-at-this-dude.mp3");
-const correSelecAud = new Audio("/music/yes-daddy_CKEAffI.mp3");
+const wrongSelecAud = new Audio("/music/lookatthisdude.mp3");
+const correSelecAud = new Audio("/music/yesdaddy.mp3");
 
 let currentQuestionIndex = JSON.parse(localStorage.getItem("QuestionNum")) || 0;
+let correctAnswr = JSON.parse(localStorage.getItem("correctAnswr")) || 0;
+let countdown;
+
 let storedTimeLeft = JSON.parse(localStorage.getItem("Timer"));
 let lastTimestamp = JSON.parse(localStorage.getItem("LastTimestamp"));
-let originalTime = JSON.parse(localStorage.getItem("OriginalTime")) || 20;
-let countdown;
-let timeLeft;
+let originalTime = 30;
 
-if (storedTimeLeft && lastTimestamp) {
-  const elapsedTime = Math.floor((Date.now() - lastTimestamp) / 1000);
-  timeLeft = Math.max(storedTimeLeft - elapsedTime, 0);
-} else {
-  timeLeft = 30;
+if (!storedTimeLeft || Date.now() - lastTimestamp > originalTime * 1000) {
+  storedTimeLeft = 30;
+  localStorage.setItem("Timer", JSON.stringify(storedTimeLeft));
+  localStorage.setItem("LastTimestamp", JSON.stringify(Date.now()));
 }
 
-if (!localStorage.getItem("OriginalTime")) {
-  localStorage.setItem("OriginalTime", JSON.stringify(timeLeft));
-  originalTime = timeLeft;
-}
+let timeLeft = storedTimeLeft;
 
-const halftime = Math.floor(originalTime / 2);
-const sevfivper = Math.floor(originalTime * 0.25);
+localStorage.setItem("Timer", JSON.stringify(timeLeft));
+localStorage.setItem("LastTimestamp", JSON.stringify(Date.now()));
 
 const updateBackgroundColor = () => {
-  if (timeLeft > halftime) {
+  if (timeLeft > 15) {
     document.body.style.backgroundColor = "rgba(204, 226, 194, 1)";
-    timer.style.backgroundColor = "#02a409";
+    timer.style.backgroundColor = "rgba(1, 171, 8, 1)";
     nextBtn.style.color = "rgba(1, 171, 8, 1)";
-  } else if (timeLeft <= halftime && timeLeft > sevfivper) {
+  } else if (timeLeft > 7) {
     document.body.style.backgroundColor = "#E4E5C7";
     timer.style.backgroundColor = "rgba(197, 177, 0, 0.65)";
     nextBtn.style.color = "#C58800";
@@ -49,14 +46,10 @@ const updateBackgroundColor = () => {
 
 const startTimer = () => {
   if (countdown) clearInterval(countdown);
-
   countdown = setInterval(() => {
     if (timeLeft <= 0) {
       clearInterval(countdown);
-      localStorage.removeItem("QuestionNum");
       localStorage.removeItem("Timer");
-      localStorage.removeItem("OriginalTime");
-      nextBtn.style.display = "block";
       return;
     }
 
@@ -64,12 +57,10 @@ const startTimer = () => {
     localStorage.setItem("Timer", JSON.stringify(timeLeft));
     localStorage.setItem("LastTimestamp", JSON.stringify(Date.now()));
 
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    timer.textContent = `${String(minutes).padStart(2, "0")}:${String(
-      seconds
-    ).padStart(2, "0")}`;
-
+    timer.textContent = `${String(Math.floor(timeLeft / 60)).padStart(
+      2,
+      "0"
+    )}:${String(timeLeft % 60).padStart(2, "0")}`;
     updateBackgroundColor();
   }, 1000);
 };
@@ -77,7 +68,10 @@ const startTimer = () => {
 const updateQuestion = () => {
   if (currentQuestionIndex >= jsQuestions.length) {
     localStorage.removeItem("QuestionNum");
-    nextBtn.style.display = "none";
+    clearInterval(countdown);
+    setTimeout(() => {
+      document.location.href = "page_3.html";
+    }, 1000);
     return;
   }
 
@@ -95,6 +89,7 @@ const updateQuestion = () => {
 
     option.addEventListener("click", () => {
       if (isOptionSelected) return;
+      isOptionSelected = true;
 
       const allOptions = document.querySelectorAll(".container-inputs");
       allOptions.forEach((opt) => {
@@ -106,18 +101,14 @@ const updateQuestion = () => {
         option.classList.add("incorrect");
         speakerIco.style.display = "block";
         wrongSelecAud.play();
-
-        setTimeout(() => {
-          speakerIco.style.display = "none";
-        }, 1700);
-      }
-
-      if (option.innerText === currentQuestion.answer) {
+        setTimeout(() => (speakerIco.style.display = "none"), 1700);
+      } else {
+        option.classList.add("correct");
         speakerIco.style.display = "block";
         correSelecAud.play();
-        setTimeout(() => {
-          speakerIco.style.display = "none";
-        }, 1700);
+        correctAnswr++;
+        localStorage.setItem("correctAnswr", JSON.stringify(correctAnswr));
+        setTimeout(() => (speakerIco.style.display = "none"), 1700);
       }
 
       allOptions.forEach((opt) => {
@@ -126,14 +117,14 @@ const updateQuestion = () => {
         }
       });
 
-      isOptionSelected = true;
       if (currentQuestionIndex === jsQuestions.length - 1) {
         localStorage.removeItem("QuestionNum");
         nextBtn.style.display = "block";
+        clearInterval(countdown);
       }
+
       setTimeout(() => {
         if (currentQuestionIndex < jsQuestions.length - 1) {
-          nextBtn.style.display = "none";
           currentQuestionIndex++;
           localStorage.setItem(
             "QuestionNum",
@@ -152,7 +143,7 @@ const updateQuestion = () => {
 };
 
 nextBtn.addEventListener("click", () => {
-  document.location.href = "page_3.html";
+  document.location.href = "Result.html";
 });
 
 updateBackgroundColor();
