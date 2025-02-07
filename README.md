@@ -23,16 +23,16 @@ Read the question and select your answer.
 The answer is automatically submitted, and the next question will appear.
 Once all questions are answered, click the Result button to see your score.
 
-🌐 Demo
+🌐 Demo<br>
 You can try out the demo version of the quiz [here](https://web-challenge-quiz.netlify.app/quiz).
 
-✨ Styling
+✨ Styling<br>
 The app has a modern and minimalistic design.
 
 
-"The only way to learn a new programming language is by writing programs in it." – Dennis Ritchie
+"The only way to learn a new programming language is by writing programs in it." – Dennis Ritchie<br>
 
-Key Update:
+Key Update:<br>
 - **Result Button**: Clarified that after completing the quiz, the user should click the **Result** button to view the score.
 
-Feel free to ask for any more modifications!
+Feel free to ask for any more modifications!<br>
