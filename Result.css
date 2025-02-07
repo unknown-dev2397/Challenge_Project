@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -6,8 +8,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  margin: 0;
-  background-color: rgba(246, 244, 240, 1);
+  background-color: #f6f4f0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,6 +24,7 @@ header {
 
 main {
   margin-top: -100px;
+  text-align: center;
 }
 
 .middle-text {
@@ -38,11 +40,10 @@ main {
 
 .quote {
   font-size: 24px;
-  font-family: inherit;
-  margin-top: 48px;
-  text-align: center;
   font-weight: 600;
+  margin-top: 48px;
   line-height: 1.5;
+  text-align: center;
 }
 
 .btn-parent {
@@ -56,19 +57,19 @@ main {
   background-color: #35bd3a;
   border: none;
   padding: 10px 48px;
+  font-family: inherit;
   font-weight: 600;
   color: #fff;
   border-radius: 2px;
   box-shadow: 7px 5px 1px #01ab08;
-  transition: transform 0.2s ease, background-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .btn:hover {
   background-color: #2aa62e;
   box-shadow: 10px 8px 6px #019306;
-  cursor: pointer;
   transform: scale(1.05);
+  cursor: pointer;
 }
 
 .footer-text {
@@ -85,22 +86,21 @@ main {
 }
 
 .social-media {
-  max-width: 175px;
-  width: 100%;
   display: flex;
   justify-content: space-evenly;
+  width: 175px;
 }
 
 .social-media img {
   width: 30px;
-  margin-block: 15px;
+  margin: 15px 0;
 }
 
 .abu {
-  max-width: 850px;
-  width: 100%;
+  max-width: 100vh;
+  width: 90%;
   padding: 75px;
-  margin-inline: auto;
+  margin: 75px auto;
 }
 
 .parent-container {
@@ -108,23 +108,21 @@ main {
   position: relative;
 }
 
-.green-arrow {
-  display: flex;
-  position: absolute;
-  left: -50px;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-right: 30px;
-  align-items: center;
-}
-
+.green-arrow,
 .red-arrow {
   display: flex;
   position: absolute;
-  right: -50px;
   top: 50%;
   transform: translateY(-50%);
   align-items: center;
+}
+
+.green-arrow {
+  left: -50px;
+}
+
+.red-arrow {
+  right: -50px;
 }
 
 .graph-container {
@@ -144,48 +142,169 @@ main {
   width: 100%;
   height: 100px;
   border-radius: 15px;
-  background-color: rgba(255, 122, 122, 1);
+  background-color: #ff7a7a;
   overflow: hidden;
 }
 
 .graph .green {
-  background-color: rgba(53, 189, 58, 1);
+  background-color: #35bd3a;
   width: 75%;
   border-radius: 10px;
-  height: 100%;
 }
 
 .graph .red {
-  background-color: rgba(255, 122, 122, 1);
+  background-color: #ff7a7a;
   width: 25%;
   border-radius: 0 10px;
-  height: 100%;
 }
 
+.green-arrow-text,
 .red-arrow-text {
   position: absolute;
   bottom: -30px;
-  left: 100%;
-  transform: translateX(-50%);
   font-size: 16px;
   font-weight: 600;
   color: #333;
   text-align: center;
+}
+
+.red-arrow-text {
+  left: 100%;
+  transform: translateX(-50%);
 }
 
 .green-arrow-text {
-  position: absolute;
-  bottom: -30px;
   transform: translateX(-50%);
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  text-align: center;
 }
 
 .footer-text-sec {
-  color: rgba(133, 133, 133, 1);
+  color: #858585;
   font-size: 10px;
   text-align: center;
   margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 22px;
+  }
+
+  .quote {
+    font-size: 20px;
+  }
+
+  .btn {
+    margin-top: -6px;
+    font-size: 16px;
+    padding: 10px 32px;
+  }
+
+  .social-media img {
+    width: 25px;
+  }
+
+  .footer-text {
+    font-size: 16px;
+  }
+
+  .graph {
+    height: 70px;
+  }
+
+  .green-arrow,
+  .red-arrow {
+    width: 2px;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .green-arrow {
+    left: -40px;
+  }
+
+  .red-arrow {
+    margin-top: -3px;
+    right: 30px;
+  }
+
+  .green-arrow-text {
+    position: absolute;
+    right: -50px;
+    bottom: -60px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+  }
+
+  .red-arrow-text {
+    position: absolute;
+    right: -72px;
+    bottom: -60px;
+    transform: translateX(50%);
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .abu {
+    width: 90%;
+    padding: 25px;
+  }
+
+  .graph-container {
+    width: 100%;
+  }
+
+  .graph-text {
+    font-size: 14px;
+  }
+
+  .graph {
+    width: 100%;
+    height: 50px;
+  }
+
+  .green-arrow img,
+  .red-arrow img {
+    max-width: 50px;
+  }
+
+  .green-arrow {
+    left: -20px;
+  }
+
+  .red-arrow {
+    margin-top: -3px;
+    right: 30px;
+  }
+
+  .green-arrow-text {
+    position: absolute;
+    right: -45px;
+    bottom: -50px;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+  }
+
+  .red-arrow-text {
+    position: absolute;
+    right: -45px;
+    bottom: -50px;
+    transform: translateX(50%);
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+  }
 }

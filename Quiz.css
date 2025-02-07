@@ -23,7 +23,8 @@ header {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  margin-top: 24px; /* Set default margin-top for larger screens */
+  margin-top: 24px;
+  /* Set default margin-top for larger screens */
 }
 
 .main-con {
@@ -133,7 +134,8 @@ header {
   }
 
   header {
-    margin-top: 16px; /* Reduced margin-top for medium screens */
+    margin-top: 16px;
+    /* Reduced margin-top for medium screens */
   }
 
   .question {
@@ -179,7 +181,8 @@ header {
   }
 
   header {
-    margin-top: 0px; /* Remove margin-top for smaller screens */
+    margin-top: 0px;
+    /* Remove margin-top for smaller screens */
   }
 
   .question {
@@ -218,7 +221,8 @@ header {
   }
 
   header {
-    margin-top: 0px; /* Remove margin-top completely for small screens */
+    margin-top: 0px;
+    /* Remove margin-top completely for small screens */
   }
 
   header img {

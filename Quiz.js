@@ -39,6 +39,9 @@ const updateBackgroundColor = () => {
     document.body.style.backgroundColor = "rgba(219, 173, 173, 1)";
     timer.style.backgroundColor = "rgba(197, 12, 0, 0.65)";
   }
+  if (timeLeft === 0) {
+    document.location.href = "Result.html";
+  }
 };
 
 const startTimer = () => {
@@ -64,7 +67,6 @@ const startTimer = () => {
 
 const updateQuestion = () => {
   if (currentQuestionIndex >= jsQuestions.length) {
-    localStorage.removeItem("QuestionNum");
     clearInterval(countdown);
     return;
   }
@@ -112,7 +114,10 @@ const updateQuestion = () => {
       });
 
       if (currentQuestionIndex === jsQuestions.length - 1) {
-        localStorage.removeItem("QuestionNum");
+        localStorage.setItem(
+          "QuestionNum",
+          JSON.stringify(currentQuestionIndex)
+        );
         setTimeout(() => {
           document.location.href = "Result.html";
         }, 1500);
