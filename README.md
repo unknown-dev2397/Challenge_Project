@@ -18,6 +18,7 @@ This interactive quiz allows users to test their knowledge of JavaScript program
 - **JavaScript** for logic and interactivity.
 
 🛠 How to Use
+<br>
 Start the quiz by clicking the Start Quiz button.
 Read the question and select your answer.
 The answer is automatically submitted, and the next question will appear.
