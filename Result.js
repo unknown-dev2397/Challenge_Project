@@ -29,10 +29,8 @@ if (currentQuestionIndex > 0) {
 
   greenGraph.style.width = `${progressPercentage}%`;
   redGraph.style.width = `${remainingPercentage}%`;
-  GreenText.innerText = `${progressPercentage ? progressPercentage.toFixed(2) : 0
-    }%`;
-  RedText.innerText = `${remainingPercentage ? remainingPercentage.toFixed(2) : 0
-    }%`;
+  GreenText.innerText = `${progressPercentage ? progressPercentage.toFixed(2) : 0}%`;
+  RedText.innerText = `${remainingPercentage ? remainingPercentage.toFixed(2) : 0}%`;
 
   if (Qoute) {
     if (progressPercentage <= 25) {
@@ -43,9 +41,11 @@ if (currentQuestionIndex > 0) {
     } else if (progressPercentage > 50 && progressPercentage <= 85) {
       Qoute.innerHTML = "Keep learning, you have a good score!";
     } else if (progressPercentage >= 85) {
-      lockedInAlien
-        .play()
-        .catch((err) => console.error("Error playing media:", err));
+      try {
+        lockedInAlien.play();
+      } catch (err) {
+        console.error("Error playing media:", err);
+      }
       Qoute.innerHTML = "You are locked In!";
     }
   }

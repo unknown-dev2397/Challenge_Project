@@ -256,7 +256,7 @@ main {
 
   .abu {
     width: 90%;
-    padding: 25px;
+    padding: 0 25px;
   }
 
   .graph-container {
@@ -288,7 +288,7 @@ main {
 
   .green-arrow-text {
     position: absolute;
-    right: -45px;
+    right: -52px;
     bottom: -50px;
     transform: translateX(-50%);
     font-size: 12px;
