@@ -35,4 +35,4 @@ The app has a modern and minimalistic design.
 Key Update:<br>
 - **Result Button**: Clarified that after completing the quiz, the user should click the **Result** button to view the score.
 
-Feel free to ask for any more modifications!<br>
+Feel free to ask for any more modifications!
