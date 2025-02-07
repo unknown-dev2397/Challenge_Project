@@ -17,7 +17,7 @@ This interactive quiz allows users to test their knowledge of JavaScript program
 - **CSS** for styling.
 - **JavaScript** for logic and interactivity.
 
-🛠 How to Use
+🛠 How to Use<br>
 <br>
 Start the quiz by clicking the Start Quiz button.
 Read the question and select your answer.
@@ -25,11 +25,9 @@ The answer is automatically submitted, and the next question will appear.
 Once all questions are answered, click the Result button to see your score.
 
 🌐 Demo<br>
-<br>
 You can try out the demo version of the quiz [here](https://web-challenge-quiz.netlify.app/quiz).
 
 ✨ Styling<br>
-<br>
 The app has a modern and minimalistic design.
 
 
