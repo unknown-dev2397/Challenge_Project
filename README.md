@@ -1,4 +1,4 @@
-JavaScript Quiz App
+**JavaScript Quiz App**
 
 Welcome to the **JavaScript Quiz App**! 🎉
 This interactive quiz allows users to test their knowledge of JavaScript programming concepts through various levels of difficulty.
