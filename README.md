@@ -33,6 +33,6 @@ The app has a modern and minimalistic design.
 "The only way to learn a new programming language is by writing programs in it." – Dennis Ritchie<br>
 
 Key Update:<br>
-- **Result Button**: Clarified that after completing the quiz, the user should click the **Result** button to view the score.
+- **Result Button**: Clarified that after completing the quiz, the user should click the **Result** button to view the score.<br>
 
 Feel free to ask for any more modifications!
