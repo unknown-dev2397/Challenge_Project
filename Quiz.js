@@ -2,7 +2,6 @@ import { jsQuestions } from "./js_questions.js";
 
 const question = document.querySelector(".question h1");
 const questionNum = document.querySelector(".question-num");
-const nextBtn = document.querySelector(".nav a");
 const choiceSec = document.querySelector(".choice-por");
 const timer = document.querySelector(".timer");
 const speakerIco = document.querySelector(".speaker-svg svg");
@@ -11,63 +10,41 @@ const correSelecAud = new Audio("/music/yesdaddy.mp3");
 
 let currentQuestionIndex = JSON.parse(localStorage.getItem("QuestionNum")) || 0;
 let correctAnswr = JSON.parse(localStorage.getItem("correctAnswr")) || 0;
+let timeLeft = JSON.parse(localStorage.getItem("Timer")) || 30;
 let countdown;
 
-let storedTimeLeft = JSON.parse(localStorage.getItem("Timer"));
-let lastTimestamp = JSON.parse(localStorage.getItem("LastTimestamp"));
-let originalTime = 30;
-
-if (!storedTimeLeft || Date.now() - lastTimestamp > originalTime * 1000) {
-  storedTimeLeft = 30;
-  localStorage.setItem("Timer", JSON.stringify(storedTimeLeft));
-  localStorage.setItem("LastTimestamp", JSON.stringify(Date.now()));
-}
-
-let timeLeft = storedTimeLeft;
-
-localStorage.setItem("Timer", JSON.stringify(timeLeft));
-localStorage.setItem("LastTimestamp", JSON.stringify(Date.now()));
-
 const updateBackgroundColor = () => {
-  if (timeLeft > 15) {
-    document.body.style.backgroundColor = "rgba(204, 226, 194, 1)";
-    timer.style.backgroundColor = "rgba(1, 171, 8, 1)";
-  } else if (timeLeft > 7) {
-    document.body.style.backgroundColor = "#E4E5C7";
-    timer.style.backgroundColor = "rgba(197, 177, 0, 0.65)";
-  } else {
-    document.body.style.backgroundColor = "rgba(219, 173, 173, 1)";
-    timer.style.backgroundColor = "rgba(197, 12, 0, 0.65)";
-  }
-  if (timeLeft === 0) {
-    document.location.href = "Result.html";
-  }
+  document.body.style.backgroundColor =
+    timeLeft > 15 ? "rgba(204, 226, 194, 1)" :
+      timeLeft > 7 ? "#E4E5C7" :
+        "rgba(219, 173, 173, 1)";
+
+  timer.style.backgroundColor =
+    timeLeft > 15 ? "rgba(1, 171, 8, 1)" :
+      timeLeft > 7 ? "rgba(197, 177, 0, 0.65)" :
+        "rgba(197, 12, 0, 0.65)";
+
+  if (timeLeft === 0) document.location.href = "Result.html";
 };
 
-const startTimer = () => {
-  if (countdown) clearInterval(countdown);
-  countdown = setInterval(() => {
-    if (timeLeft <= 0) {
-      clearInterval(countdown);
-      localStorage.removeItem("Timer");
-      return;
-    }
-
-    timeLeft--;
-    localStorage.setItem("Timer", JSON.stringify(timeLeft));
-    localStorage.setItem("LastTimestamp", JSON.stringify(Date.now()));
-
-    timer.textContent = `${String(Math.floor(timeLeft / 60)).padStart(
-      2,
-      "0"
-    )}:${String(timeLeft % 60).padStart(2, "0")}`;
-    updateBackgroundColor();
-  }, 1000);
-};
+// const startTimer = () => {
+//   if (countdown) clearInterval(countdown);
+//   countdown = setInterval(() => {
+//     if (timeLeft <= 0) {
+//       clearInterval(countdown);
+//       document.location.href = "Result.html";
+//       return;
+//     }
+//     timeLeft--;
+//     timer.textContent = `00:${String(timeLeft).padStart(2, "0")}`;
+//     updateBackgroundColor();
+//     localStorage.setItem("Timer", JSON.stringify(timeLeft));
+//   }, 1000);
+// };
 
 const updateQuestion = () => {
   if (currentQuestionIndex >= jsQuestions.length) {
-    clearInterval(countdown);
+    document.location.href = "Result.html";
     return;
   }
 
@@ -75,7 +52,6 @@ const updateQuestion = () => {
   question.innerText = currentQuestion.question;
   questionNum.innerText = `${currentQuestionIndex + 1}/${jsQuestions.length}`;
   choiceSec.innerHTML = "";
-  let isOptionSelected = false;
 
   currentQuestion.options.forEach((choice) => {
     const option = document.createElement("div");
@@ -84,65 +60,42 @@ const updateQuestion = () => {
     choiceSec.append(option);
 
     option.addEventListener("click", () => {
-      if (isOptionSelected) return;
-      isOptionSelected = true;
-
-      const allOptions = document.querySelectorAll(".container-inputs");
-      allOptions.forEach((opt) => {
-        opt.classList.remove("correct", "incorrect");
+      document.querySelectorAll(".container-inputs").forEach(opt => {
         opt.style.pointerEvents = "none";
       });
 
-      if (option.innerText !== currentQuestion.answer) {
+      if (choice !== currentQuestion.answer) {
         option.classList.add("incorrect");
-        speakerIco.style.display = "block";
         wrongSelecAud.play();
-        setTimeout(() => (speakerIco.style.display = "none"), 1700);
       } else {
         option.classList.add("correct");
-        speakerIco.style.display = "block";
         correSelecAud.play();
         correctAnswr++;
         localStorage.setItem("correctAnswr", JSON.stringify(correctAnswr));
-        setTimeout(() => (speakerIco.style.display = "none"), 1700);
       }
 
-      allOptions.forEach((opt) => {
-        if (opt.innerText === currentQuestion.answer) {
-          opt.classList.add("correct");
-        }
+      document.querySelectorAll(".container-inputs").forEach(opt => {
+        if (opt.innerText === currentQuestion.answer) opt.classList.add("correct");
       });
 
       if (currentQuestionIndex === jsQuestions.length - 1) {
-        localStorage.setItem(
-          "QuestionNum",
-          JSON.stringify(currentQuestionIndex)
-        );
+        setTimeout(() => document.location.href = "Result.html", 1500);
+      } else {
         setTimeout(() => {
-          document.location.href = "Result.html";
+          timeLeft = 30;
+          updateQuestion();
         }, 1500);
-        clearInterval(countdown);
       }
 
-      setTimeout(() => {
-        if (currentQuestionIndex < jsQuestions.length - 1) {
-          currentQuestionIndex++;
-          localStorage.setItem(
-            "QuestionNum",
-            JSON.stringify(currentQuestionIndex)
-          );
-          timeLeft = 30;
-          localStorage.setItem("Timer", JSON.stringify(timeLeft));
-          localStorage.setItem("LastTimestamp", JSON.stringify(Date.now()));
-          updateQuestion();
-        }
-      }, 1500);
+      if (currentQuestionIndex !== jsQuestions.length) {
+        currentQuestionIndex++;
+        localStorage.setItem("QuestionNum", JSON.stringify(currentQuestionIndex));
+      }
     });
   });
 
-  startTimer();
+  // startTimer();
 };
 
 updateBackgroundColor();
-startTimer();
 updateQuestion();
