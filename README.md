@@ -25,7 +25,7 @@ The answer is automatically submitted, and the next question will appear.
 Once all questions are answered, click the Result button to see your score.
 
 **🌐 Demo**<br>
-You can try out the demo version of the quiz [here](https://web-challenge-quiz.netlify.app/quiz).
+You can try out the demo version of the quiz [here](https://web-challenge-quiz.netlify.app/).
 
 **✨ Styling**<br>
 The app has a modern and minimalistic design.
