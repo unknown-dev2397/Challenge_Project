@@ -12,8 +12,8 @@ const currentQuestionIndex =
 const lockedInAlien = new Audio("/music/100Score.mp3");
 
 retryBtn.addEventListener("click", () => {
-  localStorage.clear(); // Clear all stored data
-  localStorage.setItem("Timer", "30"); // Reset timer
+  localStorage.clear();
+  localStorage.setItem("Timer", "30");
   document.location.href = "Quiz.html";
 });
 
