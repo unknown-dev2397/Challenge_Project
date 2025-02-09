@@ -1,81 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="View your results with a motivational message."
+    />
+    <title>Results Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="shortcut icon"
+      href="image/light-bulb-color-icon.svg"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="Result.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="View your results with a motivational message." />
-  <title>Results Page</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="shortcut icon" href="image/light-bulb-color-icon.svg" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="Result.css" />
+    <script src="Result.js" type="module" defer></script>
+  </head>
 
-  <script src="Result.js" type="module" defer></script>
-</head>
+  <body>
+    <header>
+      <div class="logo" aria-label="Website Logo">
+        <img src="image/page_3.png" alt="Company Logo" />
+      </div>
+      <h2 class="title">Result</h2>
+    </header>
 
-<body>
-  <header>
-    <div class="logo" aria-label="Website Logo">
-      <img src="image/page_3.png" alt="Company Logo" />
-    </div>
-    <h2 class="title">Result</h2>
-  </header>
-
-  <main>
-    <div class="abu">
-      <div class="parent-container">
-        <div class="green-arrow">
-          <img src="image/green Arrow.svg" alt="" />
-          <div class="green-arrow-text"><span></span></div>
-        </div>
-        <div class="red-arrow">
-          <img src="image/red Arrow.svg" alt="" />
-          <div class="red-arrow-text"><span></span></div>
-        </div>
-
-        <div class="graph-container">
-          <div class="graph">
-            <div class="green"></div>
-            <div class="red"></div>
+    <main>
+      <div class="abu">
+        <div class="parent-container">
+          <div class="green-arrow">
+            <img src="image/green Arrow.svg" alt="" />
+            <div class="green-arrow-text"><span></span></div>
           </div>
-          <div class="graph-text"><span></span></div>
-          <div>
+          <div class="red-arrow">
+            <img src="image/red Arrow.svg" alt="" />
+            <div class="red-arrow-text"><span></span></div>
+          </div>
+
+          <div class="graph-container">
+            <div class="graph">
+              <div class="green"></div>
+              <div class="red"></div>
+            </div>
             <div class="graph-text"><span></span></div>
-            <div class="graph-text"><span></span></div>
+            <div>
+              <div class="graph-text"><span></span></div>
+              <div class="graph-text"><span></span></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="middle-text">
-      <h1 class="quote"></h1>
-      <div class="btn-parent">
-        <button class="btn" aria-label="Click to retry">
-          &lt;&lt;&lt; Retry
-        </button>
+      <div class="middle-text">
+        <h1 class="quote"></h1>
+        <div class="btn-parent">
+          <button class="btn" aria-label="Click to retry">
+            &lt;&lt;&lt; Retry
+          </button>
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <footer>
-    <h3 class="footer-text">Share your score:</h3>
-    <div class="parent-social">
-      <div class="social-media">
-        <a href="" target="_blank">
-          <img src="image/facebook.svg" alt="Facebook" />
-        </a>
-        <a href="" target="_blank">
-          <img src="image/twitter.svg" alt="Twitter" />
-        </a>
-        <a href="" target="_blank">
-          <img src="image/linkedin.svg" alt="LinkedIn" />
-        </a>
+    <footer>
+      <h3 class="footer-text">Share your score:</h3>
+      <div class="parent-social">
+        <div class="social-media">
+          <a href="" target="_blank">
+            <img src="image/facebook.svg" alt="Facebook" />
+          </a>
+          <a href="" target="_blank">
+            <img src="image/twitter.svg" alt="Twitter" />
+          </a>
+          <a href="" target="_blank">
+            <img src="image/linkedin.svg" alt="LinkedIn" />
+          </a>
+        </div>
       </div>
-    </div>
-    <p class="footer-text-sec">Made with ❤️ by <a target="_blank" href="
-      https://github.com/unknown-dev2397/Challenge_Project/">@camper</a> </p>
-  </footer>
-</body>
-
+      <p class="footer-text-sec">
+        Made with ❤️ by
+        <a
+          target="_blank"
+          href="
+      https://github.com/unknown-dev2397/Challenge_Project/"
+          >@camper</a
+        >
+      </p>
+    </footer>
+  </body>
 </html>

@@ -7,7 +7,8 @@ const redGraph = document.querySelector(".graph .red");
 const quote = document.querySelector(".quote");
 
 const correctAnswr = JSON.parse(localStorage.getItem("correctAnswr")) || 0;
-const currentQuestionIndex = JSON.parse(localStorage.getItem("QuestionNum")) || 0;
+const currentQuestionIndex =
+  JSON.parse(localStorage.getItem("QuestionNum")) || 0;
 const lockedInAlien = new Audio("/music/100Score.mp3");
 
 retryBtn.addEventListener("click", () => {
@@ -29,12 +30,12 @@ if (currentQuestionIndex > 0) {
 
   quote.innerText =
     progressPercentage >= 85
-      ? (lockedInAlien.play().catch(() => { }), "You are locked In!")
+      ? (lockedInAlien.play().catch(() => {}), "You are locked In!")
       : progressPercentage > 50
-        ? "Keep learning, you have a good score!"
-        : progressPercentage > 25
-          ? "Your only limit is your mind"
-          : "Failure is not the opposite of success; it’s part of success.";
+      ? "Keep learning, you have a good score!"
+      : progressPercentage > 25
+      ? "Your only limit is your mind"
+      : "Failure is not the opposite of success; it’s part of success.";
 } else {
   document.querySelector(".parent-container").style.display = "none";
   quote.innerText = "Answer one question to see the result.";
